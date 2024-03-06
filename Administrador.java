@@ -1,31 +1,31 @@
+import java.util.Locale;
+
 public  class Administrador {
-    protected String nombre;
-    protected String contraseña;
-    public Administrador(String n,String c){
-        this.nombre=n;
-        this.contraseña=c;
-    }
+
+    protected static String password="1234A";
 
 
-    public static void MenuAdmin(int opcion){
+
+
+    public static void MenuAdmin(String opcion){
+        int n=Integer.parseInt(opcion);
         boolean lectura=true;
-
         while(lectura){
-            if(opcion==1){
+            if(n==1){
 
-            }else if(opcion==2){
+            }else if(n==2){
 
-            }else if(opcion==3){
+            }else if(n==3){
 
-            }else if(opcion==4){
+            }else if(n==4){
 
-            }else if(opcion==5){
+            }else if(n==5){
 
-            }else if(opcion==6){
+            }else if(n==6){
 
-            }else if(opcion==7){
+            }else if(n==7){
 
-            }else if(opcion==8){
+            }else if(n==8){
                 lectura=false;
             }else{
 

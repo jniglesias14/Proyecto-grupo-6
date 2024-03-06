@@ -19,9 +19,13 @@ import java.time.LocalDateTime;
             if(this.fecha.plusHours(duracionhoras).getHour()<=14){
                 this.duracion=d;
             }
+            else{
+                System.out.println("intervalo erroneo");
+            }
+        }
 
-
-
+        public void mostrar(){
+            System.out.println("Fecha"+this.fecha+"Duracion"+this.duracion);
         }
     }
 
