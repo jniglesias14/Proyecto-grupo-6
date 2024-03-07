@@ -47,8 +47,10 @@ public class Sala {
         }
     */
     public void ListarReservas(){
-        for(Object o:this.listaReservas){
-            System.out.println(o);
+        Iterator<Reserva> iterador=this.listaReservas.iterator();
+        while(iterador.hasNext()){
+            Reserva elemento=iterador.next();
+            System.out.println(elemento.toString());
         }
     }
 

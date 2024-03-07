@@ -34,8 +34,9 @@ public class Reserva {
         }
     }
 
-    public void mostrar(){
 
-        System.out.println("Fecha"+this.fecha+"Duracion"+this.duracion);
+    public String toString() {
+        return "fecha" + this.fecha + "duracion" +this.duracion;
     }
+
 }

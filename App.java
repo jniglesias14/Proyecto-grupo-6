@@ -1,6 +1,6 @@
-
+import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.Iterator;
 public class App {
     public static void main(String[] args) {
         Scanner in=new Scanner(System.in);
@@ -8,7 +8,7 @@ public class App {
         String opcion;
         int n;
         boolean seguir=true;
-
+/*
         while(seguir){
             System.out.println("dime la opcion \n1)menu administrador \n2)menu departamento");
             opcion=in.nextLine();
@@ -43,7 +43,7 @@ public class App {
                 seguir=false;
             }
         }
-/*
+
         Reserva r=new Reserva(2023,3,23,13,1);
         Reserva r2=new Reserva(2023,3,23,13,1);
         Sala s1=new Sala("juntas","J");
@@ -51,6 +51,17 @@ public class App {
         s1.añadirReserva(r2);
         s1.ListarReservas();
         */
+
+
+
+
+
+
+
+
+
+
+
 
 
     }
