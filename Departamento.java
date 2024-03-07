@@ -7,6 +7,14 @@ public class Departamento {
         this.codigo=c;
     }
 
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
     public static void MenuDepartamento(String opcion){
         boolean lectura=true;
         int n=Integer.parseInt(opcion);
@@ -23,6 +31,8 @@ public class Departamento {
             else{
 
             }
-            }
+        }
     }
+
 }
+

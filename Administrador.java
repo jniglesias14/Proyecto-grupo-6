@@ -1,12 +1,27 @@
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public  class Administrador {
 
-    protected static String password="1234A";
+    protected static final String password="1234A";
+    protected ArrayList departamentos;
 
 
 
 
+    public  boolean comprobar(String clave){
+        Iterator<Departamento> iterador = departamentos.iterator();
+        while (iterador.hasNext()) {
+            Departamento departamentoActual = iterador.next();
+            if (departamentoActual.getCodigo().equals(clave)) {
+                System.out.println("El código está repetido");
+                return true;
+            }
+        }
+        return false;
+
+
+    }
     public static void MenuAdmin(String opcion){
         int n=Integer.parseInt(opcion);
         boolean lectura=true;
