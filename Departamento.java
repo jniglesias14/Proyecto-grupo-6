@@ -22,27 +22,52 @@ public class Departamento {
         return "nombre: "+this.nombre+" codigo: "+this.codigo;
     }
 
-    public static void MenuDepartamento(String opcion){
+    public static void MenuDepartamento(){
         Scanner in=new Scanner(System.in);
         boolean lectura=true;
-        String clave;
-        System.out.println("dime la clave departamento");
-        clave=in.nextLine();
-        Administrador a1=new Administrador();
-        a1.compararDepartamento2(clave);
-        int n=Integer.parseInt(opcion);
+        int n;
+        String opcion;
         while(lectura){
+            System.out.println("dime la opcion \n1)Añadir reserva \n2)Cancelar reserva \n3)Listar todas las reservas \n4)Cerrar sesion ");
+            opcion= in.nextLine();
+            n=Integer.parseInt(opcion);
             if(n==1){
-
+                int y,m;
+                int d,h,i;
+                String codigo;
+                System.out.println("dime el año,mes,dia,hora,duracion");
+                y=in.nextInt();
+                m=in.nextInt();
+                d=in.nextInt();
+                h=in.nextInt();
+                i= in.nextInt();
+                Reserva r=new Reserva(y,m,d,h,i);
+                in.nextLine();
+                System.out.println("dime el codigo de la sala");
+                codigo=in.nextLine();
+                Administrador.añadirReservaSalas(r,codigo);
             }else if(n==2){
-
+                int y,m;
+                int d,h,i;
+                String codigo;
+                System.out.println("dime el año,mes,dia,hora,duracion");
+                y=in.nextInt();
+                m=in.nextInt();
+                d=in.nextInt();
+                h=in.nextInt();
+                i= in.nextInt();
+                Reserva r=new Reserva(y,m,d,h,i);
+                in.nextLine();
+                System.out.println("dime el codigo de la sala");
+                codigo=in.nextLine();
+                Administrador.cancelarReservaSalas(r,codigo);
             }else if(n==3){
-
+                Administrador.ListarSalas();
             }else if(n==4) {
                 lectura=false;
             }
             else{
-
+                System.out.println("opcion erronea");
             }
         }
     }
