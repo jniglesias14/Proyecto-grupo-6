@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
 public class Reserva {
     protected LocalDateTime fecha;
     protected Duration duracion;
-
+    protected  LocalDateTime fechafin;
     public Reserva(int año,int mes,int dia,int horas,int duracionhoras){
 
         LocalDateTime l1=LocalDateTime.of(año,mes,dia,horas,0,0);
@@ -18,10 +18,19 @@ public class Reserva {
 
         if(this.fecha.plusHours(duracionhoras).getHour()<=14){
             this.duracion=d;
+            this.fechafin=this.fecha.plusHours(duracionhoras);
         }
         else{
             System.out.println("intervalo erroneo");
         }
+    }
+
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    public LocalDateTime getFechafin() {
+        return fechafin;
     }
 
     @Override
@@ -36,7 +45,8 @@ public class Reserva {
 
 
     public String toString() {
-        return "fecha" + this.fecha + "duracion" +this.duracion;
+
+        return "fecha" + this.fecha + "duracion" +this.duracion+"fecha fin"+this.fechafin;
     }
 
 }

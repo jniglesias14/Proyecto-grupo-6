@@ -13,8 +13,31 @@ public class Sala {
 
     }
 
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public boolean compararreservas(Reserva r) {
+
+        Iterator<Reserva> iterador=this.listaReservas.iterator();
+        while(iterador.hasNext()){
+            Reserva elemento=iterador.next();
+            if(elemento.getFecha().equals(r.getFecha()) ||
+                    r.getFecha().isAfter(elemento.getFecha()) && r.getFecha().isBefore(elemento.getFechafin()) ||
+                    r.getFechafin().isAfter(elemento.getFecha()) && r.getFechafin().isBefore(elemento.getFechafin())){
+                return false;
+            }
+
+        }
+        return true;
+    }
+
     public void añadirReserva(Reserva r){
-        if(!this.listaReservas.contains(r)){
+        if(compararreservas(r)){
             this.listaReservas.add(r);
         }
         else{
@@ -32,7 +55,7 @@ public class Sala {
         }
     }
 
-    /*
+
         public boolean comprobar(Reserva r){
             Iterator i=this.listaReservas.iterator();
 
@@ -45,8 +68,15 @@ public class Sala {
             }
             return true;
         }
-    */
+
+
+    @Override
+    public String toString() {
+        return "nombre: "+this.nombre+" codigo: "+this.codigo;
+    }
+
     public void ListarReservas(){
+        toString();
         Iterator<Reserva> iterador=this.listaReservas.iterator();
         while(iterador.hasNext()){
             Reserva elemento=iterador.next();
@@ -55,6 +85,5 @@ public class Sala {
     }
 
 }
-
 
 
