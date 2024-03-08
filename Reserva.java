@@ -3,9 +3,10 @@ import java.time.LocalDateTime;
 public class Reserva {
     protected LocalDateTime fecha;
     protected Duration duracion;
+    protected String clave;
 
-    public Reserva(int año,int mes,int dia,int horas,int duracionhoras){
-
+    public Reserva(int año,int mes,int dia,int horas,int duracionhoras, String clave){
+        this.clave=clave;
         LocalDateTime l1=LocalDateTime.of(año,mes,dia,horas,0,0);
         Duration d=Duration.ofHours(duracionhoras);
 
@@ -36,7 +37,7 @@ public class Reserva {
 
 
     public String toString() {
-        return "fecha" + this.fecha + "duracion" +this.duracion;
+        return "Fecha " + this.fecha + " Duracion " +this.duracion + " Departamento "+ this.clave;
     }
 
 }

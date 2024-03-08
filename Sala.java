@@ -1,16 +1,33 @@
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Objects;
 
 public class Sala {
     protected String nombre;
-    protected String codigo;
-    protected ArrayList listaReservas;
+    protected String clave;
+    private static ArrayList<Sala> listaSalas = new ArrayList<Sala>();
+
+    // Metodo publico y estatico para listar todas las salas
+    public static void listarSalas(){
+        for (Sala s: listaSalas) {
+            System.out.println(s.toString());
+        }
+    }
+
+
+    // Metodo publico y estatico para listar todas las reservas
+    public static void listarReservas(){
+        for (Sala s: listaSalas) {
+            System.out.println(s.toString());
+            for(Reserva r: s.listaReservas) {
+                System.out.println(r.toString());
+            }
+        }
+    }
+
+    protected ArrayList<Reserva> listaReservas;
     public Sala(String n,String c){
         this.nombre=n;
-        this.codigo=c;
-        this.listaReservas=new ArrayList<>();
-
+        this.clave=c;
+        this.listaReservas=new ArrayList<Reserva>();
     }
 
     public void añadirReserva(Reserva r){
@@ -47,13 +64,15 @@ public class Sala {
         }
     */
     public void ListarReservas(){
-        Iterator<Reserva> iterador=this.listaReservas.iterator();
-        while(iterador.hasNext()){
-            Reserva elemento=iterador.next();
-            System.out.println(elemento.toString());
+        for(Reserva r: this.listaReservas){
+
         }
     }
 
+    @Override
+    public String toString() {
+        return "Nombre " + this.nombre + " - Clave " + this.clave;
+    }
 }
 
 
