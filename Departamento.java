@@ -1,5 +1,5 @@
 import java.util.Iterator;
-
+import java.util.Scanner;
 public class Departamento {
     protected String nombre;
     protected String codigo;
@@ -23,7 +23,13 @@ public class Departamento {
     }
 
     public static void MenuDepartamento(String opcion){
+        Scanner in=new Scanner(System.in);
         boolean lectura=true;
+        String clave;
+        System.out.println("dime la clave departamento");
+        clave=in.nextLine();
+        Administrador a1=new Administrador();
+        a1.compararDepartamento2(clave);
         int n=Integer.parseInt(opcion);
         while(lectura){
             if(n==1){

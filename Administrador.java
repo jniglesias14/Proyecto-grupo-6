@@ -27,6 +27,18 @@ public  class Administrador {
         }
         return true;
     }
+    public  boolean compararDepartamento2( String c) {
+
+        Iterator<Departamento> iterador = this.departamentos.iterator();
+        while (iterador.hasNext()) {
+            Departamento elemento = iterador.next();
+            if ( elemento.getCodigo().equals(c)) {
+                return false;
+            }
+
+        }
+        return true;
+    }
 
     public  void añadirDepartamento(String n, String c) {
 
@@ -168,16 +180,25 @@ public  class Administrador {
                 clave=in.nextLine();
                 a1.eliminarDepartametno(clave);
             } else if (n == 4) {
-
+                a1.ListarSalas();
             } else if (n == 5) {
-
+                String nombre,codigo;
+                System.out.println("dime el nombre del departamento");
+                nombre=in.nextLine();
+                System.out.println("dime el codigo del departamento");
+                codigo=in.nextLine();
+                a1.añadirSalas(nombre,codigo);
             } else if (n == 6) {
-
+                String clave;
+                System.out.println("dime la clave");
+                clave=in.nextLine();
+                a1.eliminarSala(clave);
             } else if (n == 7) {
-
+                a1.ListarSalas();
             } else if (n == 8) {
                 lectura = false;
             } else {
+                System.out.println("numero erroneo");
 
             }
         }
