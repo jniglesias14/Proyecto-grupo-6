@@ -72,9 +72,9 @@ public class App {
                                     // Añadir Sala
                                     in.nextLine();
                                     System.out.println("Nombre sala");
-                                    String nombre2 = in.nextLine();
+                                    String nombre = in.nextLine();
                                     System.out.println("Clave sala");
-                                    String clave3 = in.nextLine();
+                                    String clave = in.nextLine();
                                     break;
                                 }
                                 case 6: {
