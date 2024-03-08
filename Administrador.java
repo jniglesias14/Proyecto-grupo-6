@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 import java.util.Iterator;
-
+import java.util.Scanner;
 public  class Administrador {
-
+    Scanner in=new Scanner(System.in);
     protected static final String password = "1234A";
 
     protected static ArrayList departamentos;
@@ -99,6 +99,19 @@ public  class Administrador {
 
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     public  void ListarSalas() {
         Iterator<Sala> iterador = salas.iterator();
         while (iterador.hasNext()) {
@@ -107,87 +120,53 @@ public  class Administrador {
             elemento.ListarReservas();
         }
     }
+    public void añadirReservaSalas(Reserva r,String codigo) {
+        Iterator<Sala> iterator = this.salas.iterator();
+        while (iterator.hasNext()) {
+            Sala elementosala = iterator.next();
+            if (elementosala.getCodigo().equals(codigo)) {
+                elementosala.añadirReserva(r);
+            }
+        }
+    }
 
+    public void cancelarReservaSalas(Reserva r, String codigo) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-    public boolean compararreservas(Reserva r) {
-        Iterator<Sala> iterator=this.salas.iterator();
-        while(iterator.hasNext()){
-            Sala elementosala=iterator.next();
-            Iterator<Reserva> iterador=elementosala.listaReservas.iterator();
-            while(iterador.hasNext()){
-                Reserva elementoreserva=iterador.next();
-                if(elementoreserva.getFecha().equals(r.getFecha()) ||
-                        r.getFecha().isAfter(elementoreserva.getFecha()) && r.getFecha().isBefore(elementoreserva.getFechafin()) ||
-                        r.getFechafin().isAfter(elementoreserva.getFecha()) && r.getFechafin().isBefore(elementoreserva.getFechafin())){
-                    return false;
-                }
-
+        Iterator<Sala> iterator = this.salas.iterator();
+        while (iterator.hasNext()) {
+            Sala elementosala = iterator.next();
+            if (elementosala.getCodigo().equals(codigo)) {
+                elementosala.cancelarReserva(r);
             }
 
         }
-        return true;
-
-
-    }
-
-    public void añadirReservaSalas(Reserva r,Sala s){
-
-        if(compararreservas(r)){
-            Iterator<Sala> iterator=this.salas.iterator();
-            while(iterator.hasNext()){
-                Sala elementosala=iterator.next();
-                if(elementosala.equals(s)){
-                    elementosala.añadirReserva(r);
-                }
-                else{
-                    System.out.println("no se puede meter");
-                }
-
-        }
-        else{
-            System.out.println("no se puede meter");
-        }
-
-    }
-
-    public void cancelarReservaSalas(Reserva r,Sala s){
-        if(listaReservas.contains(r)){
-            this.listaReservas.remove(r);
-        }
-        else{
-            System.out.println("esa reserva no existe");
-        }
     }
 
 
-*/
+
 
 
     public static void MenuAdmin(String opcion) {
+        Scanner in=new Scanner(System.in);
         int n = Integer.parseInt(opcion);
+        Administrador a1=new Administrador();
         boolean lectura = true;
         while (lectura) {
             if (n == 1) {
-
+                a1.ListarDepartamentos();
             } else if (n == 2) {
 
+                String nombre,codigo;
+                System.out.println("dime el nombre del departamento");
+                nombre=in.nextLine();
+                System.out.println("dime el codigo del departamento");
+                codigo=in.nextLine();
+                a1.añadirDepartamento(nombre,codigo);
             } else if (n == 3) {
-
+                String clave;
+                System.out.println("dime la clave del departamento");
+                clave=in.nextLine();
+                a1.eliminarDepartametno(clave);
             } else if (n == 4) {
 
             } else if (n == 5) {
@@ -202,11 +181,14 @@ public  class Administrador {
 
             }
         }
+
+
+        }
+
+
     }
 
 
-
-}
 
 
 

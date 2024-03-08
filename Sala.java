@@ -56,18 +56,7 @@ public class Sala {
     }
 
 
-        public boolean comprobar(Reserva r){
-            Iterator i=this.listaReservas.iterator();
 
-            while(i.hasNext()){
-
-                if(r.equals(i)){
-                    System.out.println("esta repetido");
-                    return false;
-                }
-            }
-            return true;
-        }
 
 
     @Override

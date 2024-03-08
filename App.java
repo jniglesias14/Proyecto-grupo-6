@@ -44,35 +44,21 @@ public class App {
             }
         }
 
+*/
 
 
-        Reserva r=new Reserva(2023,3,23,12,1);
-        Reserva r2=new Reserva(2023,3,23,13,1);
-        Sala s1=new Sala("juntas","J");
-        s1.añadirReserva(r);
-        s1.añadirReserva(r2);
-        s1.ListarReservas();
-        System.out.println("-----------");
-        s1.cancelarReserva(r2);
-        s1.ListarReservas();
-        */
-
-/*
+        Administrador a1=new Administrador();
         Reserva r1 = new Reserva(2024, 2, 2, 9, 2);
         Reserva r2 = new Reserva(2024, 2, 3, 9, 2);
         Reserva r3 = new Reserva(2024, 2, 4, 9, 2);
-        Administrador a1 = new Administrador();
-        a1.añadirSalas("juntas", "j");
-        a1.añadirSalas("ventas", "v");
+        a1.añadirSalas("juntas","J");
+        a1.añadirSalas("cine","C");
+        a1.añadirSalas("biblioteca","B");
+        a1.añadirReservaSalas(r1,"J");
+        a1.añadirReservaSalas(r2,"C");
+        a1.añadirReservaSalas(r3,"B");
+        a1.cancelarReservaSalas(r1,"J");
         a1.ListarSalas();
-        */
-
-        Administrador a1=new Administrador();
-        a1.añadirDepartamento("ventas","V");
-        a1.ListarDepartamentos();
-        a1.eliminarDepartametno("V");
-        System.out.println("---");
-        a1.ListarDepartamentos();
 
     }
 }
