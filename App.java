@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Iterator;
 public class App {
-    public static void main(String[] args) {
+    public static <WrongPasswordException> void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int n = -1;
 
@@ -24,21 +24,21 @@ public class App {
                     // Login Administrador
                     System.out.println("Introduzca la contraseña");
                     String pass = in.nextLine();
-                    if(pass.equals(Administrador.password)){
-                        Administrador.MenuAdmin();
-                    }else{
-                        System.out.println("contraseña erronea");
+                    try {
+                        Administrador.login(pass);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
                     break;
                 }
                 case 2: {
                     // Login Departamento
-                    System.out.println("Introduzca la clave");
-                    String clave = in.nextLine();
-                    if(Administrador.compararDepartamento2(clave)){
-                        Departamento.MenuDepartamento();
-                    }else{
-                        System.out.println("no existe ese departamento");
+                    System.out.println("Introduzca el codigo");
+                    String codigo = in.nextLine();
+                    try {
+                        Departamento.login(codigo);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
                     break;
                 }

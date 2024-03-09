@@ -1,8 +1,7 @@
-import java.util.Iterator;
 import java.util.Scanner;
 public class Departamento {
-    protected String nombre;
-    protected String codigo;
+    private String nombre;
+    private String codigo;
 
     public Departamento(String n,String c){
         this.nombre=n;
@@ -19,59 +18,75 @@ public class Departamento {
 
     @Override
     public String toString() {
-        return "nombre: "+this.nombre+" codigo: "+this.codigo;
+        return "Nombre: "+this.nombre+" Codigo: "+this.codigo;
     }
 
-    public static void MenuDepartamento(){
+    public static void login(String c) throws Exception {
+        // Recuperamos el departamento por codigo
+        Departamento dep = Administrador.getDepartamento(c);
+
         Scanner in=new Scanner(System.in);
-        boolean lectura=true;
-        int n;
-        String opcion;
-        while(lectura){
-            System.out.println("dime la opcion \n1)Añadir reserva \n2)Cancelar reserva \n3)Listar todas las reservas \n4)Cerrar sesion ");
-            opcion= in.nextLine();
-            n=Integer.parseInt(opcion);
-            if(n==1){
-                int y,m;
-                int d,h,i;
-                String codigo;
-                System.out.println("dime el año,mes,dia,hora,duracion");
-                y=in.nextInt();
-                m=in.nextInt();
-                d=in.nextInt();
-                h=in.nextInt();
-                i= in.nextInt();
-                Reserva r=new Reserva(y,m,d,h,i);
-                in.nextLine();
-                System.out.println("dime el codigo de la sala");
-                codigo=in.nextLine();
-                Administrador.añadirReservaSalas(r,codigo);
-            }else if(n==2){
-                int y,m;
-                int d,h,i;
-                String codigo;
-                System.out.println("dime el año,mes,dia,hora,duracion");
-                y=in.nextInt();
-                m=in.nextInt();
-                d=in.nextInt();
-                h=in.nextInt();
-                i= in.nextInt();
-                Reserva r=new Reserva(y,m,d,h,i);
-                in.nextLine();
-                System.out.println("dime el codigo de la sala");
-                codigo=in.nextLine();
-                Administrador.cancelarReservaSalas(r,codigo);
-            }else if(n==3){
-                Administrador.ListarSalas();
-            }else if(n==4) {
-                lectura=false;
+        int n = -1;
+        while (n != 4) {
+            System.out.println("Elija una opcion");
+            System.out.println("1) Añadir reserva");
+            System.out.println("2) Cancelar reserva");
+            System.out.println("3) Listar todas las reservas");
+            System.out.println("4) Cerrar sesion");
+
+            // Seleccion de opcion con control de errores
+            try {
+                n = Integer.parseInt(in.nextLine());
+            } catch (NumberFormatException e) {
+                n = -1;
             }
-            else{
-                System.out.println("opcion erronea");
+            switch (n) {
+                case 1: {
+                    // Añadir reserva
+                    System.out.println("Introduzca año, mes, dia, hora y duracion");
+                    int year = in.nextInt();
+                    int month = in.nextInt();
+                    int day = in.nextInt();
+                    int hour = in.nextInt();
+                    int duracion = in.nextInt();
+                    in.nextLine();
+                    Reserva r=new Reserva(year,month,day,hour,duracion, dep.getCodigo());
+                    System.out.println("Introduzca el codigo de la sala");
+                    String codigo=in.nextLine();
+                    Administrador.añadirReservaSalas(r,codigo);
+                    break;
+                }
+                case 2: {
+                    // Cancelar reserva
+                    System.out.println("Introduzca año, mes, dia, hora y duracion");
+                    int year = in.nextInt();
+                    int month = in.nextInt();
+                    int day = in.nextInt();
+                    int hour = in.nextInt();
+                    int duracion = in.nextInt();
+                    Reserva r=new Reserva(year, month, day, hour, duracion, dep.getCodigo());
+                    in.nextLine();
+                    System.out.println("Introduzca el codigo de la sala");
+                    String codigo=in.nextLine();
+                    Administrador.cancelarReservaSalas(r,codigo);
+                    break;
+                }
+                case 3: {
+                    // Listar reservas
+                    // Administrador.ListarSalas();
+                    break;
+                }
+                case 4: {
+                    // Cerrar sesion
+                    System.out.println("Cerrando sesion");
+                    break;
+                }
+                default: {
+                    // Opcion erronea
+                    System.out.println("Opcion erronea");
+                    break;
+                }
             }
         }
     }
-
 }
-
-

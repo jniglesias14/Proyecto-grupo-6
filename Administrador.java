@@ -2,13 +2,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 public  class Administrador {
-    Scanner in=new Scanner(System.in);
-    protected static final String password = "ADMIN";
+    private static final String password = "ADMIN";
 
-    protected static ArrayList departamentos= new ArrayList<>();
-    protected static ArrayList salas=new ArrayList<>();
+    protected static ArrayList<Departamento> departamentos= new ArrayList<Departamento>();
+    protected static ArrayList<Sala> salas=new ArrayList<Sala>();
 
-
+    public static Departamento getDepartamento(String codigo) throws Exception {
+        for (Departamento d: departamentos) {
+            if (d.getCodigo().equals(codigo)) {
+                return d;
+            }
+        }
+        throw new Exception("Departamento no encontrado");
+    }
 
     public static boolean compararDepartamento(String n, String c) {
 
@@ -22,6 +28,8 @@ public  class Administrador {
         }
         return true;
     }
+
+
     public static boolean compararDepartamento2( String c) {
 
         Iterator<Departamento> iterador = departamentos.iterator();
@@ -102,22 +110,7 @@ public  class Administrador {
             }
 
         }
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public static void ListarSalas() {
         Iterator<Sala> iterador = salas.iterator();
@@ -138,7 +131,6 @@ public  class Administrador {
     }
 
     public static void cancelarReservaSalas(Reserva r, String codigo) {
-
         Iterator<Sala> iterator = salas.iterator();
         while (iterator.hasNext()) {
             Sala elementosala = iterator.next();
@@ -149,64 +141,93 @@ public  class Administrador {
         }
     }
 
+    public static void login(String pass) throws Exception {
+        // Si la contraseña no coincide levantamos excepcion
+        if (!password.equals(pass)) {
+            throw new Exception("Contraseña erronea");
+        }
 
-
-
-
-    public static void MenuAdmin() {
         Scanner in=new Scanner(System.in);
-        String opcion;
-        int n;
-        Administrador a1=new Administrador();
-        boolean lectura = true;
-        while (lectura) {
-            System.out.println("dime la opcion \n1)Listar departamentos \n2)Añadir departamento \n3)Eliminar departamento \n4)Listar salas \n5)Añadir sala \n6)Eliminar sala \n7)Listar todas las reservas \n8)Cerrar sesion");
-            opcion= in.nextLine();
-            n=Integer.parseInt(opcion);
-            if (n == 1) {
-                Administrador.ListarDepartamentos();
-            } else if (n == 2) {
-                String nombre,codigo;
-                System.out.println("dime el nombre del departamento");
-                nombre=in.nextLine();
-                System.out.println("dime el codigo del departamento");
-                codigo=in.nextLine();
-                Administrador.añadirDepartamento(nombre,codigo);
-            } else if (n == 3) {
-                String clave;
-                System.out.println("dime la clave del departamento");
-                clave=in.nextLine();
-                Administrador.eliminarDepartametno(clave);
-            } else if (n == 4) {
-                Administrador.ListarSalas();
-            } else if (n == 5) {
-                String nombre,codigo;
-                System.out.println("dime el nombre de la sala");
-                nombre=in.nextLine();
-                System.out.println("dime el codigo de la sala");
-                codigo=in.nextLine();
-                Administrador.añadirSalas(nombre,codigo);
-            } else if (n == 6) {
-                String clave;
-                System.out.println("dime la clave");
-                clave=in.nextLine();
-                Administrador.eliminarSala(clave);
-            } else if (n == 7) {
-                Administrador.ListarSalas();
-            } else if (n == 8) {
-                lectura = false;
-            } else {
-                System.out.println("numero erroneo");
+        int n = -1;
+        while (n != 8) {
+            System.out.println("Elija una opcion");
+            System.out.println("1) Listar departamentos");
+            System.out.println("2) Añadir departamento");
+            System.out.println("3) Eliminar departamento");
+            System.out.println("4) Listar salas");
+            System.out.println("5) Añadir sala");
+            System.out.println("6) Eliminar sala");
+            System.out.println("7) Listar todas las reservas");
+            System.out.println("8) Cerrar sesion");
 
+            // Seleccion de opcion con control de errores
+            try {
+                n = Integer.parseInt(in.nextLine());
+            } catch (NumberFormatException e) {
+                n = -1;
             }
-
+            switch (n) {
+                case 1: {
+                    // Listar departamentos
+                    Administrador.ListarDepartamentos();
+                    break;
+                }
+                case 2: {
+                    // Añadir departamento
+                    System.out.println("Introduzca nombre de departamento");
+                    String nombre=in.nextLine();
+                    System.out.println("Introduzca codigo de departamento");
+                    String codigo=in.nextLine();
+                    Administrador.añadirDepartamento(nombre,codigo);
+                    break;
+                }
+                case 3: {
+                    // Eliminar departamento
+                    System.out.println("Introduzca codigo de departamento");
+                    String codigo=in.nextLine();
+                    Administrador.eliminarDepartametno(codigo);
+                    break;
+                }
+                case 4: {
+                    // Listar Salas
+                    Administrador.ListarSalas();
+                    break;
+                }
+                case 5: {
+                    // Añadir sala
+                    System.out.println("Introduzca nombre de la sala");
+                    String nombre=in.nextLine();
+                    System.out.println("Introduzca codigo de la sala");
+                    String codigo=in.nextLine();
+                    Administrador.añadirSalas(nombre,codigo);
+                    break;
+                }
+                case 6: {
+                    // Eliminar sala
+                    System.out.println("Introduzca codigo de la sala");
+                    String codigo=in.nextLine();
+                    Administrador.eliminarSala(codigo);
+                    break;
+                }
+                case 7: {
+                    // Listar reservas
+                    // Administrador.ListarSalas();
+                    break;
+                }
+                case 8: {
+                    // Cerrar sesion
+                    System.out.println("Cerrando sesion");
+                    break;
+                }
+                default: {
+                    // Opcion erronea
+                    System.out.println("Opcion erronea");
+                    break;
+                }
+            }
         }
-
-
-        }
-
-
     }
+}
 
 
 
