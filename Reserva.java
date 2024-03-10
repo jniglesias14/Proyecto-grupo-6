@@ -38,10 +38,12 @@ public class Reserva {
         return codigoDepartamento;
     }
 
+    // Sobreescribimos el metodo equals para poder comparar reservas
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof Reserva r) {
-            return this.fecha ==  r.fecha && this.duracion==r.duracion && this.codigoDepartamento.equals(r.codigoDepartamento);
+            // Comparamos fechas con is equal para evitar errores
+            return this.fecha.isEqual(r.fecha) && this.fechaFin.isEqual(r.fechaFin) && this.codigoDepartamento.equals(r.codigoDepartamento);
         }
         else{
             return false;

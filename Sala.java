@@ -78,10 +78,14 @@ public class Sala {
     }
 
     public void eliminarReservasDepartamento(String codigoDepartamento) {
+        ArrayList<Reserva> eliminar = new ArrayList<Reserva>();
         for (Reserva r: listaReservas) {
             if (r.getCodigoDepartamento().equals(codigoDepartamento)) {
-                listaReservas.remove(r);
+                eliminar.add(r);
             }
+        }
+        for (Reserva r: eliminar) {
+            listaReservas.remove(r);
         }
     }
 }
