@@ -7,7 +7,7 @@ public  class Administrador {
     protected static ArrayList<Departamento> departamentos= new ArrayList<Departamento>();
     protected static ArrayList<Sala> salas=new ArrayList<Sala>();
 
-    public static Departamento getDepartamento(String codigo) throws Exception {
+    public static Departamento recuperarDepartamentoPorCodigo(String codigo) throws Exception {
         for (Departamento d: departamentos) {
             if (d.getCodigo().equals(codigo)) {
                 return d;
@@ -16,56 +16,43 @@ public  class Administrador {
         throw new Exception("Departamento no encontrado");
     }
 
-    public static boolean compararDepartamento(String n, String c) {
-
-        Iterator<Departamento> iterador = departamentos.iterator();
-        while (iterador.hasNext()) {
-            Departamento elemento = iterador.next();
-            if (elemento.getNombre().equals(n) || elemento.getCodigo().equals(c)) {
-                return false;
+    public static Sala recuperarSalaPorCodigo(String codigo) throws Exception {
+        for (Sala s: salas) {
+            if (s.getCodigo().equals(codigo)) {
+                return s;
             }
-
         }
-        return true;
+        throw new Exception("Sala no encontrada");
     }
 
-
-    public static boolean compararDepartamento2( String c) {
-
+    public static boolean existeDepartamento(String nombre, String codigo) {
         Iterator<Departamento> iterador = departamentos.iterator();
         while (iterador.hasNext()) {
             Departamento elemento = iterador.next();
-            if ( elemento.getCodigo().equals(c)) {
+            if (elemento.getNombre().equals(nombre) || elemento.getCodigo().equals(codigo)) {
                 return true;
             }
-
         }
         return false;
     }
 
-    public static void añadirDepartamento(String n, String c) {
-
-        if (compararDepartamento(n, c)) {
-            Departamento d = new Departamento(n, c);
-            departamentos.add(d);
-        } else {
-            System.out.println("no se puede meter");
+    public static void añadirDepartamento(String nombre, String codigo) throws Exception {
+        if (existeDepartamento(nombre, codigo)) {
+            throw new Exception("Ya existe un departamento con uno de los valores introducidos");
         }
-
+        Departamento d = new Departamento(nombre, codigo);
+        departamentos.add(d);
     }
 
-    public static void eliminarDepartametno(String clave) {
-        Iterator<Departamento> iterador = departamentos.iterator();
-        while (iterador.hasNext()) {
-            Departamento elemento = iterador.next();
-            if (elemento.getCodigo().equals(clave)) {
-                departamentos.remove(elemento);
-                break;
-            }
+    public static void eliminarDepartamento(String codigo) throws Exception {
+        Departamento d = recuperarDepartamentoPorCodigo(codigo);
+        departamentos.remove(d);
+        for (Sala s: salas) {
+            s.eliminarReservasDepartamento(codigo);
         }
     }
 
-    public static void ListarDepartamentos() {
+    public static void listarDepartamentos() {
         Iterator<Departamento> iterador = departamentos.iterator();
         while (iterador.hasNext()) {
             Departamento elemento = iterador.next();
@@ -73,39 +60,28 @@ public  class Administrador {
         }
     }
 
-    public static boolean compararSalas(String n, String c) {
+    public static boolean existeSala(String nombre, String codigo) {
         Iterator<Sala> iterador = salas.iterator();
         while (iterador.hasNext()) {
             Sala elemento = iterador.next();
-            if (elemento.getNombre().equals(n) || elemento.getCodigo().equals(c)) {
-                return false;
+            if (elemento.getNombre().equals(nombre) || elemento.getCodigo().equals(codigo)) {
+                return true;
             }
-
         }
-        return true;
+        return false;
     }
 
-    public static void añadirSalas(String n, String c) {
-
-        if (compararSalas(n, c)) {
-            Sala s = new Sala(n, c);
-            salas.add(s);
-        } else {
-            System.out.println("no se puede meter");
+    public static void añadirSala(String nombre, String codigo) throws Exception {
+        if (existeSala(nombre, codigo)) {
+            throw new Exception("Ya existe una sala con uno de los valores introducidos");
         }
-
+        Sala s = new Sala(nombre, codigo);
+        salas.add(s);
     }
 
-    public static void eliminarSala(String clave) {
-        Iterator<Sala> iterador = salas.iterator();
-        while (iterador.hasNext()) {
-            Sala elemento = iterador.next();
-            if (elemento.getCodigo().equals(clave)) {
-                salas.remove(elemento);
-                break;
-            }
-
-        }
+    public static void eliminarSala(String codigo) throws Exception {
+        Sala s = recuperarSalaPorCodigo(codigo);
+        salas.remove(s);
     }
 
     public static void listarSalas() {
@@ -180,7 +156,7 @@ public  class Administrador {
             switch (n) {
                 case 1: {
                     // Listar departamentos
-                    Administrador.ListarDepartamentos();
+                    Administrador.listarDepartamentos();
                     break;
                 }
                 case 2: {
@@ -189,14 +165,22 @@ public  class Administrador {
                     String nombre=in.nextLine();
                     System.out.println("Introduzca codigo de departamento");
                     String codigo=in.nextLine();
-                    Administrador.añadirDepartamento(nombre,codigo);
+                    try {
+                        Administrador.añadirDepartamento(nombre, codigo);
+                    } catch(Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 }
                 case 3: {
                     // Eliminar departamento
                     System.out.println("Introduzca codigo de departamento");
                     String codigo=in.nextLine();
-                    Administrador.eliminarDepartametno(codigo);
+                    try {
+                        Administrador.eliminarDepartamento(codigo);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 }
                 case 4: {
@@ -210,14 +194,22 @@ public  class Administrador {
                     String nombre=in.nextLine();
                     System.out.println("Introduzca codigo de la sala");
                     String codigo=in.nextLine();
-                    Administrador.añadirSalas(nombre,codigo);
+                    try {
+                        Administrador.añadirSala(nombre,codigo);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 }
                 case 6: {
                     // Eliminar sala
                     System.out.println("Introduzca codigo de la sala");
                     String codigo=in.nextLine();
-                    Administrador.eliminarSala(codigo);
+                    try {
+                        Administrador.eliminarSala(codigo);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 }
                 case 7: {

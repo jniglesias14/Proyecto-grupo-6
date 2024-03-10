@@ -21,9 +21,9 @@ public class Departamento {
         return "Nombre Departamento: " + this.nombre + " - Codigo Departamento: " + this.codigo;
     }
 
-    public static void login(String c) throws Exception {
+    public static void login(String codigoDepartamento) throws Exception {
         // Recuperamos el departamento por codigo
-        Departamento dep = Administrador.getDepartamento(c);
+        Administrador.recuperarDepartamentoPorCodigo(codigoDepartamento);
 
         Scanner in=new Scanner(System.in);
         int n = -1;
@@ -50,7 +50,7 @@ public class Departamento {
                     int hour = in.nextInt();
                     int duracion = in.nextInt();
                     in.nextLine();
-                    Reserva r=new Reserva(year, month, day, hour, duracion, dep.getCodigo());
+                    Reserva r=new Reserva(year, month, day, hour, duracion, codigoDepartamento);
                     System.out.println("Introduzca el codigo de la sala");
                     String codigo=in.nextLine();
                     Administrador.añadirReservaSalas(r, codigo);
@@ -64,7 +64,7 @@ public class Departamento {
                     int day = in.nextInt();
                     int hour = in.nextInt();
                     int duracion = in.nextInt();
-                    Reserva r=new Reserva(year, month, day, hour, duracion, dep.getCodigo());
+                    Reserva r=new Reserva(year, month, day, hour, duracion, codigoDepartamento);
                     in.nextLine();
                     System.out.println("Introduzca el codigo de la sala");
                     String codigo=in.nextLine();
@@ -73,7 +73,7 @@ public class Departamento {
                 }
                 case 3: {
                     // Listar reservas
-                    Administrador.listarDepReservas(dep.getCodigo());
+                    Administrador.listarDepReservas(codigoDepartamento);
                     break;
                 }
                 case 4: {

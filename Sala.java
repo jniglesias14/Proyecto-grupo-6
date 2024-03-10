@@ -11,7 +11,6 @@ public class Sala {
         this.nombre=n;
         this.codigo=c;
         this.listaReservas=new ArrayList<Reserva>();
-
     }
 
     public String getCodigo() {
@@ -27,8 +26,8 @@ public class Sala {
         while(iterador.hasNext()){
             Reserva elemento=iterador.next();
             if(elemento.getFecha().equals(r.getFecha()) ||
-                    r.getFecha().isAfter(elemento.getFecha()) && r.getFecha().isBefore(elemento.getFechaFin()) ||
-                    r.getFechaFin().isAfter(elemento.getFecha()) && r.getFechaFin().isBefore(elemento.getFechaFin())){
+                    (r.getFecha().isAfter(elemento.getFecha()) && r.getFecha().isBefore(elemento.getFechaFin())) ||
+                    (r.getFechaFin().isAfter(elemento.getFecha()) && r.getFechaFin().isBefore(elemento.getFechaFin()))) {
                 return false;
             }
 
@@ -41,7 +40,7 @@ public class Sala {
             this.listaReservas.add(r);
         }
         else{
-            System.out.println("no se puede meter");
+            System.out.println("Horario no disponible");
         }
 
     }
@@ -51,7 +50,7 @@ public class Sala {
             this.listaReservas.remove(r);
         }
         else{
-            System.out.println("esa reserva no existe");
+            System.out.println("Reserva no encontrada");
         }
     }
 
@@ -78,6 +77,13 @@ public class Sala {
         }
     }
 
+    public void eliminarReservasDepartamento(String codigoDepartamento) {
+        for (Reserva r: listaReservas) {
+            if (r.getCodigoDepartamento().equals(codigoDepartamento)) {
+                listaReservas.remove(r);
+            }
+        }
+    }
 }
 
 

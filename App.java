@@ -3,7 +3,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Iterator;
 public class App {
-    public static <WrongPasswordException> void main(String[] args) {
+
+    public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int n = -1;
 

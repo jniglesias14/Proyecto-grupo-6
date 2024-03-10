@@ -1,5 +1,7 @@
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Reserva {
     private LocalDateTime fecha;
     private LocalDateTime fechaFin;
@@ -48,6 +50,7 @@ public class Reserva {
 
     @Override
     public String toString() {
-        return "Inicio Reserva: " + this.fecha + " - Duracion Reserva: " + this.duracion.toHours() + " horas - Departamento: " + this.codigoDepartamento;
+        DateTimeFormatter d1 = DateTimeFormatter.ofPattern("dd/MM/yyyy-hh:mm:ss a");
+        return "Reserva: " + this.fecha.format(d1) + " - " + this.fechaFin.format(d1) + " - Departamento: " + this.codigoDepartamento;
     }
 }
