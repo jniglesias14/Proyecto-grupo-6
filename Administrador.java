@@ -62,10 +62,7 @@ public  class Administrador {
                 departamentos.remove(elemento);
                 break;
             }
-
         }
-
-
     }
 
     public static void ListarDepartamentos() {
@@ -77,7 +74,6 @@ public  class Administrador {
     }
 
     public static boolean compararSalas(String n, String c) {
-
         Iterator<Sala> iterador = salas.iterator();
         while (iterador.hasNext()) {
             Sala elemento = iterador.next();
@@ -112,14 +108,30 @@ public  class Administrador {
         }
     }
 
-    public static void ListarSalas() {
+    public static void listarSalas() {
         Iterator<Sala> iterador = salas.iterator();
         while (iterador.hasNext()) {
             Sala elemento = iterador.next();
             System.out.println(elemento.toString());
-            elemento.ListarReservas();
         }
     }
+
+    public static void listarAllReservas() {
+        Iterator<Sala> iterador = salas.iterator();
+        while (iterador.hasNext()) {
+            Sala elemento = iterador.next();
+            elemento.listarReservas();
+        }
+    }
+
+    public static void listarDepReservas(String codigoDepartamento) {
+        Iterator<Sala> iterador = salas.iterator();
+        while (iterador.hasNext()) {
+            Sala elemento = iterador.next();
+            elemento.listarDepReservas(codigoDepartamento);
+        }
+    }
+
     public static void añadirReservaSalas(Reserva r,String codigo) {
         Iterator<Sala> iterator = salas.iterator();
         while (iterator.hasNext()) {
@@ -137,7 +149,6 @@ public  class Administrador {
             if (elementosala.getCodigo().equals(codigo)) {
                 elementosala.cancelarReserva(r);
             }
-
         }
     }
 
@@ -190,7 +201,7 @@ public  class Administrador {
                 }
                 case 4: {
                     // Listar Salas
-                    Administrador.ListarSalas();
+                    Administrador.listarSalas();
                     break;
                 }
                 case 5: {
@@ -211,7 +222,7 @@ public  class Administrador {
                 }
                 case 7: {
                     // Listar reservas
-                    // Administrador.ListarSalas();
+                    Administrador.listarAllReservas();
                     break;
                 }
                 case 8: {

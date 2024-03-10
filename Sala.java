@@ -3,13 +3,14 @@ import java.util.Iterator;
 import java.util.Objects;
 
 public class Sala {
-    protected String nombre;
-    protected String codigo;
-    protected ArrayList listaReservas;
+    private String nombre;
+    private String codigo;
+    private ArrayList<Reserva> listaReservas;
+
     public Sala(String n,String c){
         this.nombre=n;
         this.codigo=c;
-        this.listaReservas=new ArrayList<>();
+        this.listaReservas=new ArrayList<Reserva>();
 
     }
 
@@ -21,14 +22,13 @@ public class Sala {
         return nombre;
     }
 
-    public boolean compararreservas(Reserva r) {
-
+    public boolean compararReservas(Reserva r) {
         Iterator<Reserva> iterador=this.listaReservas.iterator();
         while(iterador.hasNext()){
             Reserva elemento=iterador.next();
             if(elemento.getFecha().equals(r.getFecha()) ||
-                    r.getFecha().isAfter(elemento.getFecha()) && r.getFecha().isBefore(elemento.getFechafin()) ||
-                    r.getFechafin().isAfter(elemento.getFecha()) && r.getFechafin().isBefore(elemento.getFechafin())){
+                    r.getFecha().isAfter(elemento.getFecha()) && r.getFecha().isBefore(elemento.getFechaFin()) ||
+                    r.getFechaFin().isAfter(elemento.getFecha()) && r.getFechaFin().isBefore(elemento.getFechaFin())){
                 return false;
             }
 
@@ -37,7 +37,7 @@ public class Sala {
     }
 
     public void añadirReserva(Reserva r){
-        if(compararreservas(r)){
+        if(compararReservas(r)){
             this.listaReservas.add(r);
         }
         else{
@@ -55,21 +55,26 @@ public class Sala {
         }
     }
 
-
-
-
-
     @Override
     public String toString() {
-        return "nombre: "+this.nombre+" codigo: "+this.codigo;
+        return "Nombre Sala: " + this.nombre + " - Codigo Sala: " + this.codigo;
     }
 
-    public void ListarReservas(){
-        toString();
-        Iterator<Reserva> iterador=this.listaReservas.iterator();
+    public void listarReservas(){
+        Iterator<Reserva> iterador = this.listaReservas.iterator();
         while(iterador.hasNext()){
             Reserva elemento=iterador.next();
-            System.out.println(elemento.toString());
+            System.out.println(this.toString() + " - " + elemento.toString());
+        }
+    }
+
+    public void listarDepReservas(String codigoDepartamento){
+        Iterator<Reserva> iterador = this.listaReservas.iterator();
+        while(iterador.hasNext()){
+            Reserva elemento=iterador.next();
+            if (elemento.getCodigoDepartamento().equals(codigoDepartamento)) {
+                System.out.println(this.toString() + " - " + elemento.toString());
+            }
         }
     }
 

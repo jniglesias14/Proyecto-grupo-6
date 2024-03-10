@@ -18,7 +18,7 @@ public class Departamento {
 
     @Override
     public String toString() {
-        return "Nombre: "+this.nombre+" Codigo: "+this.codigo;
+        return "Nombre Departamento: " + this.nombre + " - Codigo Departamento: " + this.codigo;
     }
 
     public static void login(String c) throws Exception {
@@ -50,10 +50,10 @@ public class Departamento {
                     int hour = in.nextInt();
                     int duracion = in.nextInt();
                     in.nextLine();
-                    Reserva r=new Reserva(year,month,day,hour,duracion, dep.getCodigo());
+                    Reserva r=new Reserva(year, month, day, hour, duracion, dep.getCodigo());
                     System.out.println("Introduzca el codigo de la sala");
                     String codigo=in.nextLine();
-                    Administrador.añadirReservaSalas(r,codigo);
+                    Administrador.añadirReservaSalas(r, codigo);
                     break;
                 }
                 case 2: {
@@ -73,7 +73,7 @@ public class Departamento {
                 }
                 case 3: {
                     // Listar reservas
-                    // Administrador.ListarSalas();
+                    Administrador.listarDepReservas(dep.getCodigo());
                     break;
                 }
                 case 4: {
