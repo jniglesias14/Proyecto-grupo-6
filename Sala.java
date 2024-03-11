@@ -35,13 +35,15 @@ public class Sala {
         return true;
     }
 
-    public void añadirReserva(Reserva r){
+    public void añadirReserva(Reserva r) {
         if(compararReservas(r)){
             this.listaReservas.add(r);
+
         }
         else{
             System.out.println("Horario no disponible");
         }
+
 
     }
 
