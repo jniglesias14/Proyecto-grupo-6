@@ -26,8 +26,8 @@ public class Sala {
         while(iterador.hasNext()){
             Reserva elemento=iterador.next();
             if(elemento.getFecha().equals(r.getFecha()) ||
-                    (r.getFecha().isAfter(elemento.getFecha()) && r.getFecha().isBefore(elemento.getFechaFin())) ||
-                    (r.getFechaFin().isAfter(elemento.getFecha()) && r.getFechaFin().isBefore(elemento.getFechaFin()))) {
+            (r.getFecha().isAfter(elemento.getFecha()) && r.getFecha().isBefore(elemento.getFechaFin())) ||
+            (r.getFechaFin().isAfter(elemento.getFecha()) && r.getFechaFin().isBefore(elemento.getFechaFin()))) {
                 return false;
             }
 
